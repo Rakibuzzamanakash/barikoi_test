@@ -1,4 +1,6 @@
 import 'package:barikoi_test/data/response/status.dart';
+import 'package:barikoi_test/model/PlaceModel.dart';
+import 'package:barikoi_test/model_view/save_model_view.dart';
 import 'package:barikoi_test/resources/dimension/app_dimension.dart';
 import 'package:barikoi_test/views/widgets/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import '../model_view/autoComplete_view_model.dart';
 class SearchView extends StatelessWidget {
   SearchView({super.key});
   final AutoCompleteViewModel controller = Get.put(AutoCompleteViewModel());
+  final SaveModelView saveModelView = Get.put(SaveModelView());
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +79,27 @@ class SearchView extends StatelessWidget {
                                               Navigator.pop(context);
                                             },
                                             child: CustomModalBottomSheet(
+                                              action: () {
+                                                saveModelView
+                                                    .saveItem(PlaceModel(
+                                                  area: data.area.toString(),
+                                                  address:
+                                                      data.address.toString(),
+                                                  longitude:
+                                                      data.longitude.toString(),
+                                                  latitude:
+                                                      data.latitude.toString(),
+                                                  uCode: data.uCode.toString(),
+                                                  postCode:
+                                                      data.postCode.toString(),
+                                                  district:
+                                                      data.district.toString(),
+                                                  city: '',
+                                                  pType: '',
+                                                  subType: '',
+                                                  id: data.id!.toInt(),
+                                                ));
+                                              },
                                               area: data.area.toString(),
                                               address: data.address.toString(),
                                               long: data.longitude.toString(),

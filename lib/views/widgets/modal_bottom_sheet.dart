@@ -15,6 +15,7 @@ class CustomModalBottomSheet extends StatelessWidget {
   final String? postCode;
   final String? district;
   final String? placeCode;
+  final Function? action;
 
   const CustomModalBottomSheet(
       {super.key,
@@ -24,7 +25,8 @@ class CustomModalBottomSheet extends StatelessWidget {
       this.lat,
       this.postCode,
       this.district,
-      this.placeCode});
+      this.placeCode,
+      this.action});
 
   @override
   Widget build(BuildContext context) {
@@ -77,17 +79,24 @@ class CustomModalBottomSheet extends StatelessWidget {
                                 fontSize: 18),
                           ),
                         ),
-                        Container(
-                          width: 34,
-                          height: 34,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                color: AppColors.appLightTillColor,
-                              )
-                              //borderRadius: BorderRadius.circular(20),
-                              ),
-                          child: Image.asset(AppAssets.blackSaveIcon),
+                        InkWell(
+                          onTap: () {
+                            if (action != null) {
+                              action!(); // Call the action function if it's not null
+                            }
+                          },
+                          child: Container(
+                            width: 34,
+                            height: 34,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: AppColors.appLightTillColor,
+                                )
+                                //borderRadius: BorderRadius.circular(20),
+                                ),
+                            child: Image.asset(AppAssets.blackSaveIcon),
+                          ),
                         )
                       ],
                     ),
